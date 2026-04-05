@@ -1,0 +1,165 @@
+body { font-family: 'Arial', sans-serif; background-color: #f0f2f5; text-align: center; padding: 20px; }
+
+.interface-choix { background: white; max-width: 900px; margin: 0 auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.categories-container { display: flex; justify-content: space-between; flex-wrap: wrap; text-align: left; margin-bottom: 20px; }
+.colonne-choix { width: 23%; min-width: 180px; margin-bottom: 20px; }
+.colonne-choix label { display: block; margin-bottom: 5px; cursor: pointer; font-size: 14px; }
+.compteur { font-size: 12px; color: #666; }
+
+.btn-generer { background-color: #007238; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; text-transform: uppercase; }
+
+/* VISUEL FINAL SOMBRE */
+#zone-a-capturer { display: none; width: 850px; background-color: #1a1a1a; color: white; padding: 40px; box-sizing: border-box; }
+.top-header { color: #aaa; margin-bottom: 20px; text-align: center; letter-spacing: 1px; font-weight: bold; font-size: 14px;}
+
+.main-title { display: flex; margin-bottom: 40px; }
+.title-text { background: #007238; color: white; height: 60px; width: 100%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 900; text-transform: uppercase; border-radius: 5px; }
+
+.layout-colonnes { display: flex; justify-content: space-between; }
+.colonne-visuel { width: 48%; }
+.bloc-poste { display: flex; margin-bottom: 20px; align-items: stretch; }
+
+.etiquette-verticale { background: #007238; writing-mode: vertical-rl; text-orientation: upright; padding: 15px 5px; margin-right: 15px; font-weight: bold; letter-spacing: 4px; border-radius: 5px; text-align: center; font-size: 14px; display: flex; align-items: center; justify-content: center;}
+
+.liste-joueurs { list-style: none; padding: 0; margin: 0; width: 100%; display: flex; flex-direction: column; gap: 8px;}
+
+/* NOUVEAU : LES CARTES JOUEURS */
+
+.joueur-carte { display: flex; align-items: center; background-color: #2a2a2a; border-radius: 8px; padding: 6px 12px; border: 1px solid #333; }
+img.joueur-photo { width: 45px; height: 45px; border-radius: 5px; object-fit: cover; background-color: #444; }
+.joueur-infos { flex-grow: 1; text-align: left; margin-left: 15px; display: flex; flex-direction: column; justify-content: center;}
+.joueur-nom { font-weight: bold; font-size: 16px; color: #fff; text-transform: uppercase; margin-bottom: 2px;}
+.joueur-club { font-size: 12px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px;}
+img.joueur-logo { width: 35px; height: 35px; object-fit: contain; margin-left: 10px; }
+
+/* --- LE FOOTER DU VISUEL --- */
+.footer-visuel { 
+    border-top: 1px solid #444; 
+    margin-top: 30px; 
+    padding-top: 20px; 
+    padding-bottom: 10px;
+    text-align: center; 
+    position: relative; /* Indispensable pour garder le logo à l'intérieur */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-visuel h3 { 
+    margin: 0; 
+    color: #fff; 
+    font-size: 24px; 
+}
+
+/* --- LE NOUVEAU LOGO EN BAS À GAUCHE --- */
+.logo-bas-gauche {
+    position: absolute;
+    left: 10px;    /* Colle le logo à gauche */
+    bottom: 5px;   /* Ajuste la hauteur par rapport au bas */
+    height: 60px;  /* Ajuste cette valeur si tu le veux plus grand ou plus petit */
+    object-fit: contain;
+}
+
+/* BOUTON RÉSULTAT */
+#resultat { display: none; margin-top: 30px; }
+#btn-telecharger { display: block; margin: 20px auto; background-color: #333; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; text-transform: uppercase; }
+label:has(input:disabled) { opacity: 0.3; }
+
+/* --- DESIGN DES LIGNES AVEC CASE À COCHER --- */
+/* --- DESIGN DES LIGNES AVEC CASE À COCHER --- */
+.carte-choix {
+    display: flex !important; /* Force l'affichage en ligne */
+    flex-direction: row;      /* De gauche à droite */
+    align-items: center;      /* Centre tout verticalement */
+    cursor: pointer;
+    margin-bottom: 8px;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background 0.2s;
+}
+
+.carte-choix:hover {
+    background-color: #f5f5f5; 
+}
+
+.carte-choix input[type="checkbox"] {
+    margin-right: 10px;
+    margin-left: 5px;
+    margin-top: 0;           /* Enlève les marges parasites en haut */
+    transform: scale(1.2); 
+    cursor: pointer;
+    flex-shrink: 0;          /* Empêche la case d'être écrasée */
+}
+/* 2. On enlève le fond noir */
+.carte-contenu {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    background-color: transparent; /* Plus de fond ! */
+    border: none;
+    padding: 0;
+}
+
+/* 3. Le style du contenu de la ligne */
+.carte-photo {
+    width: 35px;
+    height: 35px;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-right: 12px;
+    background-color: #eee; 
+}
+
+.carte-infos {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/* 4. On passe le texte en foncé vu que le fond de ton site est blanc */
+.carte-nom {
+    color: #333; 
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.carte-club {
+    color: #777; 
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.carte-logo {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+/* --- EFFET GRISÉ QUAND LE MAX EST ATTEINT --- */
+.carte-choix.grise {
+    opacity: 0.4; /* Rend la ligne semi-transparente */
+    cursor: not-allowed; /* Change la souris en sens interdit */
+    background-color: transparent !important;
+}
+
+.carte-choix.grise input[type="checkbox"] {
+    cursor: not-allowed;
+}
+
+/* --- REPOSITIONNEMENT DE LA CASE À COCHER --- */
+/* (Remplace ton ancien bloc .carte-choix input[type="checkbox"] par celui-ci) */
+.carte-choix input[type="checkbox"] {
+    display: block; 
+    margin-right: 6px; /* On réduit la marge pour la coller à la photo */
+    margin-left: 2px;
+    transform: scale(1.2); 
+    cursor: pointer;
+}
+/* Taille et alignement du drapeau dans le titre */
+.drapeau-titre {
+    height: 35px; /* Tu pourras ajuster cette taille si besoin */
+    margin-left: 15px; /* Petit espace entre le texte et le drapeau */
+    border-radius: 4px; /* Rend les bords très légèrement arrondis */
+    object-fit: cover;
+}

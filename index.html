@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de Liste - LaTaniereDZ</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="interface-choix">
+        <h1>Crée ta liste des pour la coupe du monde 🇩🇿</h1>
+        
+        <div class="categories-container">
+            <div class="colonne-choix">
+                <h3>Gardiens <span id="cpt-gardien" class="compteur">(0/3)</span></h3>
+                <div id="liste-gardiens"></div>
+            </div>
+
+            <div class="colonne-choix">
+                <h3>Défenseurs <span id="cpt-defenseur" class="compteur">(0/9)</span></h3>
+                <div id="liste-defenseurs"></div>
+            </div>
+
+            <div class="colonne-choix">
+                <h3>Milieux <span id="cpt-milieu" class="compteur">(0/7)</span></h3>
+                <div id="liste-milieux"></div>
+            </div>
+
+            <div class="colonne-choix">
+                <h3>Attaquants <span id="cpt-attaquant" class="compteur">(0/7)</span></h3>
+                <div id="liste-attaquants"></div>
+            </div>
+        </div>
+
+        <button class="btn-generer" onclick="genererVisuel()">GÉNÉRER MA LISTE</button>
+    </div>
+
+    <div id="zone-a-capturer">
+        <div class="top-header">⚽ ALGÉRIE ⚽</div>
+        
+        <div class="main-title">
+            <div class="title-text">MA LISTE POUR LA COUPE DU MONDE </div>
+        </div>
+
+        <div class="layout-colonnes">
+            <div class="colonne-visuel">
+                <div class="bloc-poste">
+                    <div class="etiquette-verticale">GARDIENS</div>
+                    <ul class="liste-joueurs" id="visuel-gardiens"></ul>
+                </div>
+                <div class="bloc-poste">
+                    <div class="etiquette-verticale">DÉFENSEURS</div>
+                    <ul class="liste-joueurs" id="visuel-defenseurs"></ul>
+                </div>
+            </div>
+
+            <div class="colonne-visuel">
+                <div class="bloc-poste">
+                    <div class="etiquette-verticale">MILIEUX</div>
+                    <ul class="liste-joueurs" id="visuel-milieux"></ul>
+                </div>
+                <div class="bloc-poste">
+                    <div class="etiquette-verticale">ATTAQUANTS</div>
+                    <ul class="liste-joueurs" id="visuel-attaquants"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-visuel">
+            <img src="logos/cdm.png" class="logo-bas-gauche">
+            <h3>#LaTaniereDZ</h3>
+        </div>
+    </div> <div id="resultat">
+        <h2>Voici ta liste ! 👇</h2>
+        <button id="btn-telecharger" onclick="telechargerImage()">TÉLÉCHARGER MON IMAGE</button>
+        <div id="image-finale"></div>
+    </div>
+
+    <script src="joueurs.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
