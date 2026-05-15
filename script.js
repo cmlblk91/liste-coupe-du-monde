@@ -136,7 +136,9 @@ function gererLimiteMixte(checkboxClicked) {
 
 // Fonction pour capturer le visuel
 // Fonction pour capturer le visuel (Version Corrigée)
+// Fonction pour capturer le visuel
 function genererVisuel() {
+    // 1. On remplit le modèle HTML caché avec les joueurs sélectionnés
     remplirVisuel('liste-gardiens', 'visuel-gardiens');
     remplirVisuel('liste-defenseurs', 'visuel-defenseurs');
     remplirVisuel('liste-milieux', 'visuel-milieux');
@@ -144,33 +146,38 @@ function genererVisuel() {
 
     const zone = document.getElementById('zone-a-capturer');
     
-    // On force l'affichage temporaire pour la capture
+    // 2. On affiche la zone une fraction de seconde pour la capture
     zone.style.display = 'block'; 
-    zone.style.visibility = 'visible';
 
-    // IMPORTANT : useCORS et allowTaint permettent de télécharger l'image même avec des logos/photos
+    // 3. Transformation en image (avec les réglages HD et anti-blocage)
     html2canvas(zone, { 
         backgroundColor: '#1a1a1a', 
-        scale: 3, // Qualité supérieure pour les réseaux sociaux
-        useCORS: true, 
-        allowTaint: true,
-        logging: true 
+        scale: 3,         // Qualité maximale pour X/Twitter
+        useCORS: true,    // Indispensable pour que le téléchargement fonctionne avec les logos
+        allowTaint: true
     }).then(canvas => {
+        // 4. On affiche l'image sur le site
         const imageFinaleConteneur = document.getElementById('image-finale');
         imageFinaleConteneur.innerHTML = '';
         imageFinaleConteneur.appendChild(canvas);
         
+        // 5. On recache le modèle HTML
         zone.style.display = 'none'; 
-
+        
+        // 6. On fait apparaître le bouton télécharger et on scroll vers lui
         const blocResultat = document.getElementById('resultat');
         blocResultat.style.display = 'block';
         blocResultat.scrollIntoView({ behavior: 'smooth' });
 
-        // OPTIONNEL : Envoyer les données pour les stats ici (voir étape Firebase après)
-        // envoyerStatsFirebase(); 
+        // 7. NOUVEAU : Envoi silencieux des données vers ta base Firebase
+        if (typeof window.envoyerStatsFirebase === "function") {
+            window.envoyerStatsFirebase();
+        }
+        
     }).catch(err => {
         console.error("Erreur capture : ", err);
-        alert("Erreur lors de la génération. Vérifie que toutes les photos sont bien chargées.");
+        alert("Une erreur s'est produite lors de la création de l'image. Essaie de recharger la page.");
+        zone.style.display = 'none';
     });
 }
 
