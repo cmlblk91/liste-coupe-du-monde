@@ -164,50 +164,49 @@ label:has(input:disabled) { opacity: 0.3; }
     object-fit: cover;
 }
 
-@media screen and (max-width: 768px) {
-    /* 1. On autorise le débordement horizontal pour que l'utilisateur puisse "slider" */
-    body {
-        overflow-x: auto;
-        padding: 10px 0;
-    }
-
-    /* 2. Le fond blanc s'étire selon le contenu */
+@media screen and (max-content: 768px) {
+    /* 1. On permet au fond blanc de s'élargir si nécessaire */
     .interface-choix {
-        width: fit-content !important; /* S'étire si les milieux/attaquants sont larges */
-        min-width: 100vw; /* Fait au moins la largeur de l'écran */
+        width: fit-content !important;
+        min-width: 100vw;
         padding: 15px !important;
         margin: 0 !important;
-        border-radius: 0;
+        box-sizing: border-box;
     }
 
-    /* 3. On organise les colonnes */
+    /* 2. On aligne les colonnes verticalement par défaut */
     .categories-container {
         display: flex !important;
-        flex-direction: column !important; /* Empile tout par défaut */
+        flex-direction: column !important;
         align-items: flex-start !important;
     }
 
-    /* 4. On force Gardiens et Défenseurs à prendre 100% (pour rester seuls sur leur ligne) */
+    /* 3. Gardiens et Défenseurs : Largeur normale, pas d'étirement bizarre */
     .colonne-choix:nth-child(1), 
     .colonne-choix:nth-child(2) {
         width: 100% !important;
+        max-width: 400px; /* On limite pour que les logos restent proches du nom */
     }
 
-    /* 5. LE TRUC MAGIQUE : On aligne Milieux (3ème) et Attaquants (4ème) */
-    /* On crée une sous-ligne juste pour eux deux */
+    /* 4. Milieux et Attaquants : Côte à côte */
     .colonne-choix:nth-child(3), 
     .colonne-choix:nth-child(4) {
         display: inline-block !important;
-        width: 250px !important; /* Largeur fixe pour qu'ils soient l'un à côté de l'autre */
+        width: 280px !important; /* Largeur fixe pour stabiliser l'affichage */
         vertical-align: top;
+        margin-right: 10px;
     }
 
-    /* On force le conteneur à ne pas les couper */
+    /* 5. FIX LOGOS ESPACÉS : On force les cartes à ne pas prendre toute la largeur */
+    .carte-choix {
+        display: flex !important;
+        justify-content: flex-start !important;
+        width: auto !important; /* Empêche l'étirement vers la droite */
+        max-width: 100%;
+    }
+
+    /* On s'assure que le container ne force pas tout sur une seule ligne géante */
     .categories-container {
-        white-space: nowrap; /* Empêche le retour à la ligne pour les inline-block */
-    }
-
-    .colonne-choix {
-        white-space: normal; /* Mais on autorise le texte à l'intérieur des colonnes */
+        white-space: normal !important; 
     }
 }
