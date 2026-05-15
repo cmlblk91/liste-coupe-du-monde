@@ -23,62 +23,67 @@ h3 { color: #007238; border-bottom: 2px solid #007238; padding-bottom: 5px; marg
 .step-container.active { display: block; animation: fadeIn 0.3s; }
 
 /* La ligne entière du joueur */
+/* Le conteneur qui regroupe tout (la ligne) */
 .carte-choix {
     display: flex !important;
-    align-items: center; /* Centre verticalement les éléments */
-    background: #f8f9fa;
-    margin-bottom: 12px;
+    align-items: center; /* Aligne verticalement au centre */
+    background: #ffffff;
+    margin-bottom: 10px;
     padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
+    border-radius: 12px;
     border: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
-/* Checkbox */
+.carte-choix:hover {
+    background-color: #f9f9f9;
+}
+
+/* La petite case à cocher */
 .carte-choix input[type="checkbox"] {
     margin-right: 12px;
     transform: scale(1.2);
 }
 
-/* Photo du joueur */
+/* L'image du joueur */
 .carte-photo {
-    width: 60px; /* Taille fixe pour l'image */
-    height: 60px;
-    border-radius: 8px;
+    width: 65px; /* Ajuste selon tes préférences */
+    height: 65px;
+    border-radius: 10px; /* Bords arrondis comme sur ton exemple */
     object-fit: cover;
     margin-right: 15px;
-    background: #ddd;
-    flex-shrink: 0; /* Empêche l'image de s'écraser */
+    flex-shrink: 0; /* Empêche l'image de se déformer */
 }
 
-/* Le bloc central : Nom en haut, Club en bas */
+/* Le bloc texte (Nom + Club) */
 .carte-infos {
     display: flex;
-    flex-direction: column; /* Aligne le nom au-dessus du club */
+    flex-direction: column; /* Empile le nom au-dessus du club */
     justify-content: center;
-    flex-grow: 1; /* Prend toute la place restante */
-    height: 60px; /* Aligne la hauteur sur celle de la photo */
+    flex-grow: 1; /* Prend toute la place restante pour pousser le logo à droite */
+    text-align: left;
 }
 
-.carte-nom { 
-    font-weight: bold; 
-    font-size: 15px; 
-    color: #222; 
+.carte-nom {
+    font-weight: bold;
+    font-size: 16px;
+    color: #1a1a1a;
+    text-transform: uppercase; /* Comme sur ton image */
+    margin-bottom: 2px;
+}
+
+.carte-club {
+    font-size: 13px;
+    color: #666;
     text-transform: uppercase;
-    line-height: 1.2;
 }
 
-.carte-club { 
-    font-size: 12px; 
-    color: #666; 
-    margin-top: 4px;
-}
-
-/* Logo du club tout à droite */
-.carte-logo { 
-    width: 35px; 
-    height: 35px; 
-    object-fit: contain; 
+/* Le logo du club tout à droite */
+.carte-logo {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
     margin-left: 10px;
     flex-shrink: 0;
 }
