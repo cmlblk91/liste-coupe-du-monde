@@ -164,32 +164,33 @@ label:has(input:disabled) { opacity: 0.3; }
     object-fit: cover;
 }
 
-/* --- Correction pour Téléphone --- */
-/* --- CORRECTION MOBILE (FONCTIONNE ENFIN) --- */
+/* --- CORRECTION MOBILE FINALE --- */
 @media (max-width: 768px) {
-    /* On cible le bon conteneur qui contient tes colonnes */
+    /* 1. On force le conteneur à empiler les colonnes verticalement */
     .categories-container { 
-        display: flex;
-        flex-direction: column !important; /* On force l'empilement vertical */
-        align-items: center;
+        display: block !important; /* Block force le retour à la ligne automatique */
+        width: 100%;
     }
 
-    /* On force chaque colonne (Gardiens, Def, etc.) à prendre toute la largeur */
+    /* 2. On force chaque colonne à prendre 100% de la largeur */
     .colonne-choix {
-        width: 100% !important;
-        max-width: 400px; /* Pour éviter que ce soit trop large sur tablette */
-        margin-bottom: 30px;
-        min-width: unset; /* On enlève la contrainte de largeur mini */
+        width: 100% !important; 
+        min-width: 100% !important;
+        margin-bottom: 40px; /* Plus d'espace pour que ça respire */
+        display: block;
     }
 
-    /* On ajuste un peu la taille des noms pour que ça loge bien */
-    .carte-nom {
-        font-size: 14px;
+    /* 3. On centre les titres de sections (Milieux, Attaquants...) */
+    .colonne-choix h3 {
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 20px;
     }
 
-    /* On réduit les marges du container principal pour gagner de la place */
-    .interface-choix {
-        padding: 10px;
-        margin: 10px;
+    /* 4. On ajuste les cartes pour qu'elles prennent bien la place sur mobile */
+    .carte-choix {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
