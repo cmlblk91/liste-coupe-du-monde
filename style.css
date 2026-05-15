@@ -164,36 +164,35 @@ label:has(input:disabled) { opacity: 0.3; }
     object-fit: cover;
 }
 
-/* --- LE CORRECTIF FINAL (MÉTHODE BRUTE) --- */
+/* --- CONFIGURATION MOBILE --- */
 @media screen and (max-width: 768px) {
-    /* 1. On détruit le flex du conteneur */
+    /* 1. Le conteneur principal prend toute la place */
     .categories-container { 
         display: block !important; 
         width: 100% !important;
-        padding: 0 !important;
     }
 
-    /* 2. On cible les colonnes et on ANNULE le min-width */
+    /* 2. Ta colonne "Milieux & Attaquants" prend toute la largeur */
     .colonne-choix {
         display: block !important;
         width: 100% !important;
-        max-width: 100% !important;
-        min-width: 0 !important; /* <--- ICI : On casse les 180px qui bloquent tout */
-        margin-bottom: 40px !important;
-        float: none !important;
-        clear: both !important;
+        min-width: 100% !important;
+        margin-bottom: 30px !important;
     }
 
-    /* 3. On s'assure que les cartes ne débordent pas */
+    /* 3. C'EST CETTE RÈGLE QUI VA TOUT RÉPARER : */
+    /* On force chaque ligne de joueur à prendre 100% de la largeur du téléphone */
     .carte-choix {
-        width: 100% !important;
+        display: flex !important; /* Pour garder l'alignement photo/nom */
+        width: 100% !important;   /* Force à prendre TOUTE la ligne */
+        max-width: 100% !important;
         box-sizing: border-box !important;
+        float: none !important;    /* Annule tout alignement côte à côte */
     }
 
-    /* 4. On réduit un peu l'interface pour pas que ça touche les bords du tel */
-    .interface-choix {
-        padding: 10px !important;
-        margin: 5px !important;
-        width: auto !important;
+    /* On ajuste un peu l'image pour que ce soit propre */
+    .carte-photo {
+        width: 45px !important; /* Un peu plus grand sur mobile pour le confort */
+        height: 45px !important;
     }
 }
