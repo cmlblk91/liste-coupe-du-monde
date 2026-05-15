@@ -166,27 +166,37 @@ label:has(input:disabled) { opacity: 0.3; }
 
 /* FORCE LE PASSAGE À LA LIGNE SUR MOBILE */
 @media screen and (max-width: 850px) {
-    /* 1. On brise le flexbox ici */
+    /* 1. On force le conteneur à devenir une grille d'une seule colonne */
     .categories-container { 
         display: grid !important; 
-        grid-template-columns: 1fr !important; /* Une seule colonne, point barre */
+        grid-template-columns: 1fr !important; /* Une seule colonne de haut en bas */
+        gap: 30px !important; /* Espace entre les blocs Gardiens, Def, Milieux, Att */
         width: 100% !important;
+        padding: 0 !important;
     }
 
-    /* 2. On force les colonnes à occuper tout l'espace */
+    /* 2. On neutralise toutes les anciennes règles des colonnes */
     .colonne-choix {
         width: 100% !important;
         min-width: 100% !important;
         max-width: 100% !important;
-        margin: 0 0 40px 0 !important;
+        margin: 0 !important;
         display: block !important;
     }
-    
-    /* 3. On réduit la taille de l'interface pour qu'elle ne bloque pas sur les bords */
+
+    /* 3. On s'assure que l'interface ne déborde pas de l'écran */
     .interface-choix {
-        width: 95% !important;
+        width: 100% !important;
+        max-width: 100% !important;
         padding: 10px !important;
-        margin: 0 auto !important;
+        box-sizing: border-box !important; /* Pour que le padding ne fasse pas déborder */
     }
-    body { background-color: red !important; }
+
+    /* 4. On ajuste les textes pour que ce soit lisible */
+    .colonne-choix h3 {
+        text-align: center;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #007238;
+        padding-bottom: 5px;
+    }
 }
