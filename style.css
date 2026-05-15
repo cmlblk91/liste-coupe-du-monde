@@ -165,43 +165,49 @@ label:has(input:disabled) { opacity: 0.3; }
 }
 
 @media screen and (max-width: 768px) {
-    /* 1. On empêche le débordement horizontal sur le body */
+    /* 1. On autorise le débordement horizontal pour que l'utilisateur puisse "slider" */
     body {
-        overflow-x: hidden;
-        padding: 5px; /* On réduit le padding pour gagner de la place */
+        overflow-x: auto;
+        padding: 10px 0;
     }
 
-    /* 2. On étire le bloc blanc et on réduit les marges */
+    /* 2. Le fond blanc s'étire selon le contenu */
     .interface-choix {
-        width: 100% !important;
-        max-width: 100% !important;
+        width: fit-content !important; /* S'étire si les milieux/attaquants sont larges */
+        min-width: 100vw; /* Fait au moins la largeur de l'écran */
+        padding: 15px !important;
         margin: 0 !important;
-        padding: 10px !important;
-        box-sizing: border-box !important;
-        border-radius: 0; /* On enlève les arrondis pour coller aux bords */
+        border-radius: 0;
     }
 
-    /* 3. On "dézoome" légèrement les colonnes pour qu'elles rentrent */
+    /* 3. On organise les colonnes */
     .categories-container {
         display: flex !important;
-        flex-wrap: nowrap !important; /* On garde l'alignement côte à côte */
-        overflow-x: auto; /* Permet de scroller de gauche à droite si c'est VRAIMENT trop large */
-        gap: 10px !important;
-        justify-content: flex-start !important;
+        flex-direction: column !important; /* Empile tout par défaut */
+        align-items: flex-start !important;
     }
 
-    /* 4. On réduit la taille des cartes joueurs pour que ça rentre */
+    /* 4. On force Gardiens et Défenseurs à prendre 100% (pour rester seuls sur leur ligne) */
+    .colonne-choix:nth-child(1), 
+    .colonne-choix:nth-child(2) {
+        width: 100% !important;
+    }
+
+    /* 5. LE TRUC MAGIQUE : On aligne Milieux (3ème) et Attaquants (4ème) */
+    /* On crée une sous-ligne juste pour eux deux */
+    .colonne-choix:nth-child(3), 
+    .colonne-choix:nth-child(4) {
+        display: inline-block !important;
+        width: 250px !important; /* Largeur fixe pour qu'ils soient l'un à côté de l'autre */
+        vertical-align: top;
+    }
+
+    /* On force le conteneur à ne pas les couper */
+    .categories-container {
+        white-space: nowrap; /* Empêche le retour à la ligne pour les inline-block */
+    }
+
     .colonne-choix {
-        flex: 0 0 170px !important; /* On fixe une largeur plus petite par colonne */
-        min-width: 170px !important;
-    }
-
-    .carte-nom {
-        font-size: 11px !important; /* On dézoome le texte */
-    }
-
-    .carte-photo {
-        width: 30px !important;
-        height: 30px !important;
+        white-space: normal; /* Mais on autorise le texte à l'intérieur des colonnes */
     }
 }
