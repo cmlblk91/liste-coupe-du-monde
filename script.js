@@ -117,6 +117,11 @@ function actualiserGrisage(cartes, estLimiteAtteinte) {
 // --- CAPTURE ET GÉNÉRATION IMAGE ---
 
 function genererVisuel() {
+
+    console.log("Le bouton a été cliqué !"); // AJOUTE ÇA
+    alert("Début de la génération...");      // ET ÇA POUR TESTER
+    
+    // ... reste du code
     // 1. Remplissage des listes dans la zone de capture
     remplirVisuel('liste-gardiens', 'visuel-gardiens');
     remplirVisuel('liste-defenseurs', 'visuel-defenseurs');
