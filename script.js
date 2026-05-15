@@ -136,13 +136,7 @@ function actualiserGrisage(cartes, estLimiteAtteinte) {
 // --- CAPTURE ET GÉNÉRATION IMAGE ---
 
 function genererVisuel() {
-    remplirVisuel('liste-gardiens', 'visuel-gardiens');
-    remplirVisuel('liste-defenseurs', 'visuel-defenseurs');
-    remplirVisuel('liste-milieux', 'visuel-milieux');
-    remplirVisuel('liste-attaquants', 'visuel-attaquants');
-
-    const zone = document.getElementById('zone-a-capturer');
-    zone.style.display = 'block'; 
+    // ... (tout ton code de remplissage et html2canvas reste pareil)
 
     html2canvas(zone, { 
         backgroundColor: '#1a1a1a', 
@@ -155,8 +149,13 @@ function genererVisuel() {
         
         zone.style.display = 'none'; 
         
+        // CORRECTION ICI :
         const blocResultat = document.getElementById('resultat');
-        blocResultat.style.display = 'block';
+        const btnTelecharger = document.getElementById('btn-telecharger');
+        
+        blocResultat.classList.add('resultat-visible'); // On utilise la classe CSS
+        btnTelecharger.style.display = 'block'; // On force l'affichage du bouton
+        
         blocResultat.scrollIntoView({ behavior: 'smooth' });
 
         if (typeof window.envoyerStatsFirebase === "function") {
