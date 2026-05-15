@@ -19,11 +19,6 @@
                     <div id="liste-gardiens"></div>
                 </div>
                 <button class="btn-step" onclick="showStep(2)">SUIVANT</button>
-
-<div class="navigation-btns">
-    <button class="btn-back" onclick="showStep(1)">RETOUR</button>
-    <button class="btn-step" onclick="showStep(3)">SUIVANT</button>
-</div>
             </div>
 
             <div id="step-2" class="step-container">
@@ -32,8 +27,8 @@
                     <div id="liste-defenseurs"></div>
                 </div>
                 <div class="navigation-btns">
-                    <button class="btn-back" onclick="showStep(1)">Retour</button>
-                    <button class="btn-step" onclick="showStep(3)">Suivant : Milieux & Att.</button>
+                    <button class="btn-back" onclick="showStep(1)">RETOUR</button>
+                    <button class="btn-step" onclick="showStep(3)">SUIVANT</button>
                 </div>
             </div>
 
@@ -46,7 +41,7 @@
                     </div>
                 </div>
                 <div class="navigation-btns">
-                    <button class="btn-back" onclick="showStep(2)">Retour</button>
+                    <button class="btn-back" onclick="showStep(2)">RETOUR</button>
                     <button class="btn-generer" onclick="genererVisuel()">GÉNÉRER MA LISTE</button>
                 </div>
             </div>
@@ -59,7 +54,6 @@
         <div class="main-title">
             <div class="title-text">MA LISTE POUR LA COUPE DU MONDE</div>
         </div>
-
         <div class="layout-colonnes">
             <div class="colonne-visuel">
                 <div class="bloc-poste">
@@ -71,7 +65,6 @@
                     <ul class="liste-joueurs" id="visuel-defenseurs"></ul>
                 </div>
             </div>
-
             <div class="colonne-visuel">
                 <div class="bloc-poste">
                     <div class="etiquette-verticale">MILIEUX</div>
@@ -83,7 +76,6 @@
                 </div>
             </div>
         </div>
-
         <div class="footer-visuel">
             <img src="logos/cdm.png" class="logo-bas-gauche">
             <h3>#LaTaniereDZ</h3>
@@ -101,13 +93,10 @@
 
     <script>
         function showStep(stepNumber) {
-            // Cache toutes les étapes
             document.querySelectorAll('.step-container').forEach(step => {
                 step.classList.remove('active');
             });
-            // Affiche l'étape choisie
             document.getElementById('step-' + stepNumber).classList.add('active');
-            // Remonte en haut de page
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
@@ -134,9 +123,7 @@
         document.querySelectorAll('input:checked').forEach(cb => {
           joueursChoisis.push(cb.dataset.nom);
         });
-
         if (joueursChoisis.length === 0) return;
-
         try {
           await addDoc(collection(db, "listes_utilisateurs"), {
             composition: joueursChoisis,
