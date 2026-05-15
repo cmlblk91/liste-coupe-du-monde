@@ -14,6 +14,20 @@ window.onload = function() {
     afficherJoueurs(attaquants, 'liste-attaquants', 'cpt-attaquant', maxMilieuxAttaquants, true);
 };
 
+function passerEtape(prochaineEtapeId) {
+    // 1. On cache toutes les étapes
+    document.querySelectorAll('.colonne-choix').forEach(div => {
+        div.style.display = 'none';
+    });
+    
+    // 2. On affiche la prochaine
+    const prochaine = document.getElementById(prochaineEtapeId);
+    prochaine.style.display = 'block';
+    
+    // 3. Petit bonus : on remonte en haut de la page
+    window.scrollTo(0, 0);
+}
+
 // Fonction qui génère les petites cartes cliquables
 function afficherJoueurs(liste, conteneurId, cptId, max, estMixte) {
     const conteneur = document.getElementById(conteneurId);
