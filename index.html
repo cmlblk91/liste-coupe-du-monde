@@ -9,27 +9,25 @@
 </head>
 <body>
     <div class="interface-choix">
-        <h1>Crée ta liste des pour la coupe du monde 🇩🇿</h1>
+        <h1>Crée ta liste pour la coupe du monde 🇩🇿</h1>
         
-        <div class="categories-container">
-            <div class="colonne-choix">
+        <div class="categories-container" style="display: flex; gap: 40px; justify-content: center;">
+            <div class="colonne-choix" style="flex: 1;">
                 <h3>Gardiens <span id="cpt-gardien" class="compteur">(0/3)</span></h3>
                 <div id="liste-gardiens"></div>
             </div>
 
-            <div class="colonne-choix">
+            <div class="colonne-choix" style="flex: 1;">
                 <h3>Défenseurs <span id="cpt-defenseur" class="compteur">(0/9)</span></h3>
                 <div id="liste-defenseurs"></div>
             </div>
 
-            <div class="colonne-choix">
-                <h3>Milieux <span id="cpt-milieu" class="compteur">(0/7)</span></h3>
-                <div id="liste-milieux"></div>
-            </div>
-
-            <div class="colonne-choix">
-                <h3>Attaquants <span id="cpt-attaquant" class="compteur">(0/7)</span></h3>
-                <div id="liste-attaquants"></div>
+            <div class="colonne-choix" style="flex: 2.2; min-width: 45%; grid-column: span 2;">
+                <h3 style="text-align: center; margin-bottom: 15px;">Milieux & Attaquants <span id="cpt-mixte" class="compteur">(0/14)</span></h3>
+                <div style="display: flex; gap: 40px; width: 100%;">
+                    <div id="liste-milieux" style="flex: 1;"></div>
+                    <div id="liste-attaquants" style="flex: 1;"></div>
+                </div>
             </div>
         </div>
 
@@ -40,7 +38,7 @@
         <div class="top-header">⚽ ALGÉRIE ⚽</div>
         
         <div class="main-title">
-            <div class="title-text">MA LISTE POUR LA COUPE DU MONDE </div>
+            <div class="title-text">MA LISTE POUR LA COUPE DU MONDE</div>
         </div>
 
         <div class="layout-colonnes">
@@ -71,7 +69,9 @@
             <img src="logos/cdm.png" class="logo-bas-gauche">
             <h3>#LaTaniereDZ</h3>
         </div>
-    </div> <div id="resultat">
+    </div> 
+    
+    <div id="resultat">
         <h2>Voici ta liste ! 👇</h2>
         <button id="btn-telecharger" onclick="telechargerImage()">TÉLÉCHARGER MON IMAGE</button>
         <div id="image-finale"></div>
