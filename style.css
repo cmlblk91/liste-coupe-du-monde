@@ -22,60 +22,65 @@ h3 { color: #007238; border-bottom: 2px solid #007238; padding-bottom: 5px; marg
 .step-container { display: none; width: 100%; }
 .step-container.active { display: block; animation: fadeIn 0.3s; }
 
-/* --- CARTES JOUEURS (LE PLUS IMPORTANT) --- */
+/* La ligne entière du joueur */
 .carte-choix {
     display: flex !important;
-    align-items: center;
-    background: #f8f9fa; /* Petit fond gris */
-    margin-bottom: 10px;
+    align-items: center; /* Centre verticalement les éléments */
+    background: #f8f9fa;
+    margin-bottom: 12px;
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
     border: 1px solid #eee;
-    transition: all 0.2s;
 }
 
-.carte-choix:hover { background: #edf7f2; border-color: #007238; }
-
-/* On aligne la checkbox et la photo */
+/* Checkbox */
 .carte-choix input[type="checkbox"] {
     margin-right: 12px;
-    transform: scale(1.3);
+    transform: scale(1.2);
 }
 
+/* Photo du joueur */
 .carte-photo {
-    width: 50px;
-    height: 50px;
+    width: 60px; /* Taille fixe pour l'image */
+    height: 60px;
     border-radius: 8px;
     object-fit: cover;
     margin-right: 15px;
     background: #ddd;
+    flex-shrink: 0; /* Empêche l'image de s'écraser */
 }
 
+/* Le bloc central : Nom en haut, Club en bas */
 .carte-infos {
-    flex-grow: 1;
-    text-align: left;
+    display: flex;
+    flex-direction: column; /* Aligne le nom au-dessus du club */
+    justify-content: center;
+    flex-grow: 1; /* Prend toute la place restante */
+    height: 60px; /* Aligne la hauteur sur celle de la photo */
 }
 
 .carte-nom { 
-    display: block; 
     font-weight: bold; 
-    font-size: 14px; 
+    font-size: 15px; 
     color: #222; 
     text-transform: uppercase;
+    line-height: 1.2;
 }
 
 .carte-club { 
-    display: block; 
-    font-size: 11px; 
+    font-size: 12px; 
     color: #666; 
+    margin-top: 4px;
 }
 
+/* Logo du club tout à droite */
 .carte-logo { 
-    width: 30px; 
-    height: 30px; 
+    width: 35px; 
+    height: 35px; 
     object-fit: contain; 
     margin-left: 10px;
+    flex-shrink: 0;
 }
 
 /* --- BOUTONS --- */
