@@ -11,55 +11,48 @@
     <div class="interface-choix">
         <h1>Crée ta liste pour la coupe du monde 🇩🇿</h1>
         
-       <div class="categories-container">
-    <div id="step-1" class="step-container active">
-        <h3>Sélectionne tes Gardiens</h3>
-        <div class="colonne-choix">
-            </div>
-        <button class="btn-step" onclick="showStep(2)">Suivant : Défenseurs</button>
-    </div>
-
-    <div id="step-2" class="step-container">
-        <h3>Sélectionne tes Défenseurs</h3>
-        <div class="colonne-choix">
-            </div>
-        <div class="navigation-btns">
-            <button class="btn-back" onclick="showStep(1)">Retour</button>
-            <button class="btn-step" onclick="showStep(3)">Suivant : Milieux & Att.</button>
-        </div>
-    </div>
-
-    <div id="step-3" class="step-container">
-        <h3>Milieux & Attaquants</h3>
-        <div class="colonne-choix">
-            </div>
-        <div class="navigation-btns">
-            <button class="btn-back" onclick="showStep(2)">Retour</button>
-            <button class="btn-generer" onclick="genererVisuel()">Générer ma liste</button>
-        </div>
-    </div>
-</div>
-
-            <div class="colonne-choix" style="flex: 1;">
-                <h3>Défenseurs <span id="cpt-defenseur" class="compteur">(0/9)</span></h3>
-                <div id="liste-defenseurs"></div>
-            </div>
-
-            <div class="colonne-choix" style="flex: 2.2; min-width: 45%; grid-column: span 2;">
-                <h3 style="text-align: center; margin-bottom: 15px;">Milieux & Attaquants <span id="cpt-mixte" class="compteur">(0/14)</span></h3>
-                <div style="display: flex; gap: 40px; width: 100%;">
-                    <div id="liste-milieux" style="flex: 1;"></div>
-                    <div id="liste-attaquants" style="flex: 1;"></div>
+        <div class="categories-container">
+            
+            <div id="step-1" class="step-container active">
+                <div class="colonne-choix">
+                    <h3>Gardiens <span id="cpt-gardien" class="compteur">(0/3)</span></h3>
+                    <div id="liste-gardiens"></div>
+                </div>
+                <div class="navigation-btns">
+                    <button class="btn-step" onclick="showStep(2)">Suivant : Défenseurs</button>
                 </div>
             </div>
-        </div>
 
-        <button class="btn-generer" onclick="genererVisuel()">GÉNÉRER MA LISTE</button>
+            <div id="step-2" class="step-container">
+                <div class="colonne-choix">
+                    <h3>Défenseurs <span id="cpt-defenseur" class="compteur">(0/9)</span></h3>
+                    <div id="liste-defenseurs"></div>
+                </div>
+                <div class="navigation-btns">
+                    <button class="btn-back" onclick="showStep(1)">Retour</button>
+                    <button class="btn-step" onclick="showStep(3)">Suivant : Milieux & Att.</button>
+                </div>
+            </div>
+
+            <div id="step-3" class="step-container">
+                <div class="colonne-choix">
+                    <h3 style="text-align: center; margin-bottom: 15px;">Milieux & Attaquants <span id="cpt-mixte" class="compteur">(0/14)</span></h3>
+                    <div id="liste-mixte-container" style="display: flex; flex-direction: column; gap: 20px;">
+                        <div id="liste-milieux"></div>
+                        <div id="liste-attaquants"></div>
+                    </div>
+                </div>
+                <div class="navigation-btns">
+                    <button class="btn-back" onclick="showStep(2)">Retour</button>
+                    <button class="btn-generer" onclick="genererVisuel()">GÉNÉRER MA LISTE</button>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <div id="zone-a-capturer">
         <div class="top-header">⚽ ALGÉRIE ⚽</div>
-        
         <div class="main-title">
             <div class="title-text">MA LISTE POUR LA COUPE DU MONDE</div>
         </div>
@@ -102,43 +95,54 @@
 
     <script src="joueurs.js"></script>
     <script src="script.js"></script>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  // Tes clés récupérées depuis ta capture
-  const firebaseConfig = {
-    apiKey: "AIzaSyDQ_qrhdoAM1Bi7htqbi8t3WlqE5aHf-A",
-    authDomain: "liste-dz.firebaseapp.com",
-    projectId: "liste-dz",
-    storageBucket: "liste-dz.firebasestorage.app",
-    messagingSenderId: "734747884688",
-    appId: "1:734747884688:web:f816604780c5efba95ec15",
-    measurementId: "G-CQ4ZVSZTT5"
-  };
+    <script>
+        function showStep(stepNumber) {
+            // Cache toutes les étapes
+            document.querySelectorAll('.step-container').forEach(step => {
+                step.classList.remove('active');
+            });
+            // Affiche l'étape choisie
+            document.getElementById('step-' + stepNumber).classList.add('active');
+            // Remonte en haut de page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  window.envoyerStatsFirebase = async function() {
-    const joueursChoisis = [];
-    document.querySelectorAll('input:checked').forEach(cb => {
-      joueursChoisis.push(cb.dataset.nom);
-    });
+      const firebaseConfig = {
+        apiKey: "AIzaSyDQ_qrhdoAM1Bi7htqbi8t3WlqE5aHf-A",
+        authDomain: "liste-dz.firebaseapp.com",
+        projectId: "liste-dz",
+        storageBucket: "liste-dz.firebasestorage.app",
+        messagingSenderId: "734747884688",
+        appId: "1:734747884688:web:f816604780c5efba95ec15",
+        measurementId: "G-CQ4ZVSZTT5"
+      };
 
-    if (joueursChoisis.length === 0) return;
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
 
-    try {
-      await addDoc(collection(db, "listes_utilisateurs"), {
-        composition: joueursChoisis,
-        creeLe: serverTimestamp()
-      });
-      console.log("Statistiques enregistrées avec succès !");
-    } catch (e) {
-      console.error("Erreur lors de l'envoi des stats : ", e);
-    }
-  }
-</script>
+      window.envoyerStatsFirebase = async function() {
+        const joueursChoisis = [];
+        document.querySelectorAll('input:checked').forEach(cb => {
+          joueursChoisis.push(cb.dataset.nom);
+        });
 
+        if (joueursChoisis.length === 0) return;
+
+        try {
+          await addDoc(collection(db, "listes_utilisateurs"), {
+            composition: joueursChoisis,
+            creeLe: serverTimestamp()
+          });
+        } catch (e) {
+          console.error("Erreur stats : ", e);
+        }
+      }
+    </script>
 </body>
 </html>
