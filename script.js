@@ -35,26 +35,7 @@ function afficherJoueurs(liste, conteneurId, cptId, max, estMixte) {
         const label = document.createElement('label');
         label.className = 'carte-choix';
         
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.value = joueur.nom;
-        
-        // Stockage des données pour la capture finale
-        checkbox.dataset.nom = joueur.nom;
-        checkbox.dataset.club = joueur.club;
-        checkbox.dataset.photo = joueur.photo;
-        checkbox.dataset.logo = joueur.logo;
-        
-        checkbox.addEventListener('change', function() {
-            if (estMixte) {
-                gererLimiteMixte(this);
-            } else {
-                gererLimiteNormale(this, conteneur, cptId, max);
-            }
-        });
-
-        // NOUVELLE STRUCTURE : Photo | Infos (Nom/Club) | Logo
-        // Cela correspond parfaitement au CSS "Fiche"
+        // Structure HTML : Checkbox | Photo | Infos (Nom/Club) | Logo
         label.innerHTML = `
             <input type="checkbox" 
                 data-nom="${joueur.nom}" 
@@ -69,9 +50,9 @@ function afficherJoueurs(liste, conteneurId, cptId, max, estMixte) {
             <img src="${joueur.logo}" class="carte-logo" onerror="this.style.opacity='0'">
         `;
 
-        // On remet l'écouteur sur la nouvelle checkbox créée par innerHTML
-        const newCb = label.querySelector('input');
-        newCb.addEventListener('change', function() {
+        // Écouteur sur la checkbox pour gérer les limites
+        const checkbox = label.querySelector('input');
+        checkbox.addEventListener('change', function() {
             if (estMixte) {
                 gererLimiteMixte(this);
             } else {
@@ -136,7 +117,14 @@ function actualiserGrisage(cartes, estLimiteAtteinte) {
 // --- CAPTURE ET GÉNÉRATION IMAGE ---
 
 function genererVisuel() {
-    // ... (tout ton code de remplissage et html2canvas reste pareil)
+    // 1. Remplissage des listes dans la zone de capture
+    remplirVisuel('liste-gardiens', 'visuel-gardiens');
+    remplirVisuel('liste-defenseurs', 'visuel-defenseurs');
+    remplirVisuel('liste-milieux', 'visuel-milieux');
+    remplirVisuel('liste-attaquants', 'visuel-attaquants');
+
+    const zone = document.getElementById('zone-a-capturer');
+    zone.style.display = 'block'; 
 
     html2canvas(zone, { 
         backgroundColor: '#1a1a1a', 
@@ -149,12 +137,12 @@ function genererVisuel() {
         
         zone.style.display = 'none'; 
         
-        // CORRECTION ICI :
+        // Affichage du bloc résultat
         const blocResultat = document.getElementById('resultat');
         const btnTelecharger = document.getElementById('btn-telecharger');
         
-        blocResultat.classList.add('resultat-visible'); // On utilise la classe CSS
-        btnTelecharger.style.display = 'block'; // On force l'affichage du bouton
+        blocResultat.classList.add('resultat-visible'); 
+        btnTelecharger.style.display = 'block'; 
         
         blocResultat.scrollIntoView({ behavior: 'smooth' });
 
