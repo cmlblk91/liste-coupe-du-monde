@@ -8,25 +8,24 @@ body {
 
 .interface-choix { 
     background: white; 
-    max-width: 600px; /* Plus serré pour faire "appli" */
+    max-width: 600px; 
     margin: 0 auto; 
     padding: 20px; 
     border-radius: 15px; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
 }
 
-h1 { font-size: 1.5rem; color: #333; margin-bottom: 20px; }
+h1 { font-size: 1.5rem; color: #333; margin-bottom: 20px; text-align: center; }
 h3 { color: #007238; border-bottom: 2px solid #007238; padding-bottom: 5px; margin-top: 0; }
 
 /* --- SYSTEME DE PAGES --- */
 .step-container { display: none; width: 100%; }
 .step-container.active { display: block; animation: fadeIn 0.3s; }
 
-/* La ligne entière du joueur */
-/* Le conteneur qui regroupe tout (la ligne) */
+/* --- CARTES JOUEURS (INTERFACE) --- */
 .carte-choix {
     display: flex !important;
-    align-items: center; /* Aligne verticalement au centre */
+    align-items: center; 
     background: #ffffff;
     margin-bottom: 10px;
     padding: 10px;
@@ -36,32 +35,27 @@ h3 { color: #007238; border-bottom: 2px solid #007238; padding-bottom: 5px; marg
     transition: background 0.2s;
 }
 
-.carte-choix:hover {
-    background-color: #f9f9f9;
-}
+.carte-choix:hover { background-color: #f9f9f9; }
 
-/* La petite case à cocher */
 .carte-choix input[type="checkbox"] {
     margin-right: 12px;
     transform: scale(1.2);
 }
 
-/* L'image du joueur */
 .carte-photo {
-    width: 65px; /* Ajuste selon tes préférences */
+    width: 65px; 
     height: 65px;
-    border-radius: 10px; /* Bords arrondis comme sur ton exemple */
+    border-radius: 10px; 
     object-fit: cover;
     margin-right: 15px;
-    flex-shrink: 0; /* Empêche l'image de se déformer */
+    flex-shrink: 0; 
 }
 
-/* Le bloc texte (Nom + Club) */
 .carte-infos {
     display: flex;
-    flex-direction: column; /* Empile le nom au-dessus du club */
+    flex-direction: column; 
     justify-content: center;
-    flex-grow: 1; /* Prend toute la place restante pour pousser le logo à droite */
+    flex-grow: 1; 
     text-align: left;
 }
 
@@ -69,7 +63,7 @@ h3 { color: #007238; border-bottom: 2px solid #007238; padding-bottom: 5px; marg
     font-weight: bold;
     font-size: 16px;
     color: #1a1a1a;
-    text-transform: uppercase; /* Comme sur ton image */
+    text-transform: uppercase; 
     margin-bottom: 2px;
 }
 
@@ -79,13 +73,18 @@ h3 { color: #007238; border-bottom: 2px solid #007238; padding-bottom: 5px; marg
     text-transform: uppercase;
 }
 
-/* Le logo du club tout à droite */
 .carte-logo {
     width: 35px;
     height: 35px;
     object-fit: contain;
     margin-left: 10px;
     flex-shrink: 0;
+}
+
+/* --- EFFET GRISÉ --- */
+.carte-choix.grise {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 
 /* --- BOUTONS --- */
@@ -112,24 +111,32 @@ h3 { color: #007238; border-bottom: 2px solid #007238; padding-bottom: 5px; marg
     cursor: pointer;
 }
 
-/* --- VISUEL FINAL (CACHE) --- */
+/* --- VISUEL FINAL (POUR LA CAPTURE) --- */
 #zone-a-capturer { display: none; width: 850px; background: #1a1a1a; color: white; padding: 40px; }
-/* ... (Garde le reste de ton CSS pour #zone-a-capturer tel quel) ... */
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* Styles des fiches dans l'image générée */
+.joueur-carte { 
+    display: flex; 
+    align-items: center; 
+    background: #2a2a2a; 
+    padding: 8px; 
+    margin-bottom: 8px; 
+    border-radius: 8px; 
+    border: 1px solid #333;
+}
+.joueur-photo { width: 45px; height: 45px; margin-right: 15px; border-radius: 5px; }
+.joueur-infos { flex-grow: 1; text-align: left; }
+.joueur-nom { font-weight: bold; font-size: 16px; color: #fff; text-transform: uppercase; }
+.joueur-club { font-size: 12px; color: #aaa; text-transform: uppercase; }
+.joueur-logo { width: 35px; height: 35px; margin-left: auto; object-fit: contain; }
 
-/* Cache la section résultat et le bouton télécharger au chargement */
+/* --- RESULTAT --- */
 #resultat, #btn-telecharger {
-    display: none !important;
+    display: none;
 }
 
-/* Cette classe sera ajoutée par le JS pour montrer le bloc à la fin */
 .resultat-visible {
     display: block !important;
 }
 
-.joueur-carte { display: flex; align-items: center; background: #2a2a2a; padding: 5px; margin-bottom: 5px; border-radius: 5px; }
-.joueur-photo { width: 40px; height: 40px; margin-right: 10px; }
-.joueur-nom { font-weight: bold; font-size: 14px; }
-.joueur-club { font-size: 11px; color: #aaa; }
-.joueur-logo { width: 30px; height: 30px; margin-left: auto; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
