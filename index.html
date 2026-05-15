@@ -11,11 +11,22 @@
     <div class="interface-choix">
         <h1>Crée ta liste pour la coupe du monde 🇩🇿</h1>
         
-        <div class="categories-container" style="display: flex; gap: 40px; justify-content: center;">
-            <div class="colonne-choix" style="flex: 1;">
-                <h3>Gardiens <span id="cpt-gardien" class="compteur">(0/3)</span></h3>
-                <div id="liste-gardiens"></div>
-            </div>
+       <div class="categories-container">
+    <div id="etape-gardiens" class="colonne-choix">
+        <h3>Gardiens</h3>
+        <button type="button" class="btn-suivant" onclick="passerEtape('etape-defenseurs')">Suivant : Défenseurs</button>
+    </div>
+
+    <div id="etape-defenseurs" class="colonne-choix" style="display: none;">
+        <h3>Défenseurs</h3>
+        <button type="button" class="btn-suivant" onclick="passerEtape('etape-milieux')">Suivant : Milieux</button>
+    </div>
+
+    <div id="etape-milieux" class="colonne-choix" style="display: none;">
+        <h3>Milieux & Attaquants</h3>
+        <button type="button" class="btn-generer" onclick="genererVisuel()">GÉNÉRER MA LISTE</button>
+    </div>
+</div>
 
             <div class="colonne-choix" style="flex: 1;">
                 <h3>Défenseurs <span id="cpt-defenseur" class="compteur">(0/9)</span></h3>
