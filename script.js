@@ -235,4 +235,18 @@ function remplirVisuel(sourceId, cibleId) {
         cible.appendChild(li);
     });
 }
+function showStep(stepNumber) {
+    // 1. On cache toutes les étapes
+    document.querySelectorAll('.step-container').forEach(step => {
+        step.classList.remove('active');
+    });
 
+    // 2. On affiche l'étape demandée
+    const targetStep = document.getElementById('step-' + stepNumber);
+    if (targetStep) {
+        targetStep.classList.add('active');
+        
+        // 3. On remonte en haut de la page pour le confort
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
