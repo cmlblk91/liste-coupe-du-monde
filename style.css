@@ -227,10 +227,78 @@ label:has(input:disabled) { opacity: 0.3; }
     text-transform: uppercase;
 }
 
-/* Sur mobile, on s'assure que la colonne visible prend toute la place */
+/* --- GESTION DES ÉTAPES (PAGES) --- */
+.step-container {
+    display: none; /* Cache toutes les pages par défaut */
+    width: 100%;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.step-container.active {
+    display: block; /* Affiche uniquement la page active */
+}
+
+.navigation-btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.btn-suivant, .btn-step {
+    background-color: #007238;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    flex-grow: 1;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.btn-back {
+    background-color: #666;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- ADAPTATION MOBILE --- */
 @media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .interface-choix {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 15px !important;
+        box-sizing: border-box;
+    }
+
+    .categories-container {
+        display: block !important; /* On n'utilise plus de grid/flex ici */
+    }
+
     .colonne-choix {
         width: 100% !important;
         min-width: 100% !important;
+        margin-bottom: 0; /* C'est géré par les boutons maintenant */
+    }
+
+    .carte-choix {
+        width: 100% !important;
+        padding: 10px 5px !important;
     }
 }
