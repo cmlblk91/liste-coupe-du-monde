@@ -127,3 +127,9 @@ h3 { color: #007238; border-bottom: 2px solid #007238; padding-bottom: 5px; marg
 .resultat-visible {
     display: block !important;
 }
+
+.joueur-carte { display: flex; align-items: center; background: #2a2a2a; padding: 5px; margin-bottom: 5px; border-radius: 5px; }
+.joueur-photo { width: 40px; height: 40px; margin-right: 10px; }
+.joueur-nom { font-weight: bold; font-size: 14px; }
+.joueur-club { font-size: 11px; color: #aaa; }
+.joueur-logo { width: 30px; height: 30px; margin-left: auto; }
