@@ -164,27 +164,28 @@ label:has(input:disabled) { opacity: 0.3; }
     object-fit: cover;
 }
 
-/* --- LE CORRECTIF RADICAL --- */
-@media screen and (max-width: 768px) {
-    /* On force le conteneur à ne PLUS être en flex */
-    div.categories-container { 
-        display: block !important; 
+/* FORCE LE PASSAGE À LA LIGNE SUR MOBILE */
+@media screen and (max-width: 850px) {
+    /* 1. On brise le flexbox ici */
+    .categories-container { 
+        display: grid !important; 
+        grid-template-columns: 1fr !important; /* Une seule colonne, point barre */
         width: 100% !important;
     }
 
-    /* On force CHAQUE colonne à prendre toute la largeur et à chasser la suivante */
-    .categories-container .colonne-choix {
-        display: block !important;
+    /* 2. On force les colonnes à occuper tout l'espace */
+    .colonne-choix {
         width: 100% !important;
-        max-width: 100% !important;
         min-width: 100% !important;
-        float: none !important; /* Au cas où un vieux float traîne */
-        margin-bottom: 50px !important; /* Espace entre Milieux et Attaquants */
-        clear: both !important; /* Force le retour à la ligne */
+        max-width: 100% !important;
+        margin: 0 0 40px 0 !important;
+        display: block !important;
     }
-
-    /* Optionnel : on agrandit un peu les zones de clic pour le confort sur mobile */
-    .carte-choix {
-        padding: 12px 5px !important;
+    
+    /* 3. On réduit la taille de l'interface pour qu'elle ne bloque pas sur les bords */
+    .interface-choix {
+        width: 95% !important;
+        padding: 10px !important;
+        margin: 0 auto !important;
     }
 }
