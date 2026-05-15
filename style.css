@@ -163,3 +163,24 @@ label:has(input:disabled) { opacity: 0.3; }
     border-radius: 4px; /* Rend les bords très légèrement arrondis */
     object-fit: cover;
 }
+
+/* --- Correction pour Téléphone --- */
+@media (max-width: 600px) {
+    /* On force le conteneur principal à s'empiler verticalement */
+    .selection-container { 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* On s'assure que chaque bloc (Gardiens, Def, Milieux, Att) prend toute la largeur */
+    .position-group {
+        width: 95% !important; 
+        margin-bottom: 20px;
+    }
+
+    /* Si tu as un bloc spécifique pour Milieux/Attaquants côte à côte */
+    .milieux-attaquants-row {
+        flex-direction: column;
+    }
+}
