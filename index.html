@@ -12,19 +12,31 @@
         <h1>Crée ta liste pour la coupe du monde 🇩🇿</h1>
         
        <div class="categories-container">
-    <div id="etape-gardiens" class="colonne-choix">
-        <h3>Gardiens</h3>
-        <button type="button" class="btn-suivant" onclick="passerEtape('etape-defenseurs')">Suivant : Défenseurs</button>
+    <div id="step-1" class="step-container active">
+        <h3>Sélectionne tes Gardiens</h3>
+        <div class="colonne-choix">
+            </div>
+        <button class="btn-step" onclick="showStep(2)">Suivant : Défenseurs</button>
     </div>
 
-    <div id="etape-defenseurs" class="colonne-choix" style="display: none;">
-        <h3>Défenseurs</h3>
-        <button type="button" class="btn-suivant" onclick="passerEtape('etape-milieux')">Suivant : Milieux</button>
+    <div id="step-2" class="step-container">
+        <h3>Sélectionne tes Défenseurs</h3>
+        <div class="colonne-choix">
+            </div>
+        <div class="navigation-btns">
+            <button class="btn-back" onclick="showStep(1)">Retour</button>
+            <button class="btn-step" onclick="showStep(3)">Suivant : Milieux & Att.</button>
+        </div>
     </div>
 
-    <div id="etape-milieux" class="colonne-choix" style="display: none;">
+    <div id="step-3" class="step-container">
         <h3>Milieux & Attaquants</h3>
-        <button type="button" class="btn-generer" onclick="genererVisuel()">GÉNÉRER MA LISTE</button>
+        <div class="colonne-choix">
+            </div>
+        <div class="navigation-btns">
+            <button class="btn-back" onclick="showStep(2)">Retour</button>
+            <button class="btn-generer" onclick="genererVisuel()">Générer ma liste</button>
+        </div>
     </div>
 </div>
 
