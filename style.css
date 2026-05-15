@@ -1,253 +1,54 @@
-body { font-family: 'Arial', sans-serif; background-color: #f0f2f5; text-align: center; padding: 20px; }
-
-.interface-choix { background: white; max-width: 900px; margin: 0 auto; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-.categories-container { display: flex; justify-content: space-between; flex-wrap: wrap; text-align: left; margin-bottom: 20px; }
-.colonne-choix { width: 23%; min-width: 180px; margin-bottom: 20px; }
-.colonne-choix label { display: block; margin-bottom: 5px; cursor: pointer; font-size: 14px; }
-.compteur { font-size: 12px; color: #666; }
-
-.btn-generer { background-color: #007238; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; text-transform: uppercase; }
-
-/* VISUEL FINAL SOMBRE */
-#zone-a-capturer { display: none; width: 850px; background-color: #1a1a1a; color: white; padding: 40px; box-sizing: border-box; }
-.top-header { color: #aaa; margin-bottom: 20px; text-align: center; letter-spacing: 1px; font-weight: bold; font-size: 14px;}
-
-.main-title { display: flex; margin-bottom: 40px; }
-.title-text { background: #007238; color: white; height: 60px; width: 100%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 900; text-transform: uppercase; border-radius: 5px; }
-
-.layout-colonnes { display: flex; justify-content: space-between; }
-.colonne-visuel { width: 48%; }
-.bloc-poste { display: flex; margin-bottom: 20px; align-items: stretch; }
-
-.etiquette-verticale { background: #007238; writing-mode: vertical-rl; text-orientation: upright; padding: 15px 5px; margin-right: 15px; font-weight: bold; letter-spacing: 4px; border-radius: 5px; text-align: center; font-size: 14px; display: flex; align-items: center; justify-content: center;}
-
-.liste-joueurs { list-style: none; padding: 0; margin: 0; width: 100%; display: flex; flex-direction: column; gap: 8px;}
-
-/* NOUVEAU : LES CARTES JOUEURS */
-
-.joueur-carte { display: flex; align-items: center; background-color: #2a2a2a; border-radius: 8px; padding: 6px 12px; border: 1px solid #333; }
-img.joueur-photo { width: 45px; height: 45px; border-radius: 5px; object-fit: cover; background-color: #444; }
-.joueur-infos { flex-grow: 1; text-align: left; margin-left: 15px; display: flex; flex-direction: column; justify-content: center;}
-.joueur-nom { font-weight: bold; font-size: 16px; color: #fff; text-transform: uppercase; margin-bottom: 2px;}
-.joueur-club { font-size: 12px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px;}
-img.joueur-logo { width: 35px; height: 35px; object-fit: contain; margin-left: 10px; }
-
-/* --- LE FOOTER DU VISUEL --- */
-.footer-visuel { 
-    border-top: 1px solid #444; 
-    margin-top: 30px; 
-    padding-top: 20px; 
-    padding-bottom: 10px;
+/* --- BASE --- */
+body { 
+    font-family: 'Arial', sans-serif; 
+    background-color: #f0f2f5; 
     text-align: center; 
-    position: relative; /* Indispensable pour garder le logo à l'intérieur */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 20px; 
+    margin: 0;
 }
 
-.footer-visuel h3 { 
-    margin: 0; 
-    color: #fff; 
-    font-size: 24px; 
+.interface-choix { 
+    background: white; 
+    max-width: 900px; 
+    margin: 0 auto; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
 }
 
-/* --- LE NOUVEAU LOGO EN BAS À GAUCHE --- */
-.logo-bas-gauche {
-    position: absolute;
-    left: 10px;    /* Colle le logo à gauche */
-    bottom: 5px;   /* Ajuste la hauteur par rapport au bas */
-    height: 60px;  /* Ajuste cette valeur si tu le veux plus grand ou plus petit */
-    object-fit: contain;
+/* --- SYSTEME DE PAGES (STEPS) --- */
+.categories-container { 
+    display: block !important; /* On casse le flex pour le mode par étapes */
+    text-align: left; 
+    margin-bottom: 20px; 
 }
 
-/* BOUTON RÉSULTAT */
-#resultat { display: none; margin-top: 30px; }
-#btn-telecharger { display: block; margin: 20px auto; background-color: #333; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 16px; text-transform: uppercase; }
-label:has(input:disabled) { opacity: 0.3; }
-
-/* --- DESIGN DES LIGNES AVEC CASE À COCHER --- */
-/* --- DESIGN DES LIGNES AVEC CASE À COCHER --- */
-.carte-choix {
-    display: flex !important; /* Force l'affichage en ligne */
-    flex-direction: row;      /* De gauche à droite */
-    align-items: center;      /* Centre tout verticalement */
-    cursor: pointer;
-    margin-bottom: 8px;
-    padding: 5px;
-    border-radius: 5px;
-    transition: background 0.2s;
-}
-
-.carte-choix:hover {
-    background-color: #f5f5f5; 
-}
-
-.carte-choix input[type="checkbox"] {
-    margin-right: 10px;
-    margin-left: 5px;
-    margin-top: 0;           /* Enlève les marges parasites en haut */
-    transform: scale(1.2); 
-    cursor: pointer;
-    flex-shrink: 0;          /* Empêche la case d'être écrasée */
-}
-/* 2. On enlève le fond noir */
-.carte-contenu {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    background-color: transparent; /* Plus de fond ! */
-    border: none;
-    padding: 0;
-}
-
-/* 3. Le style du contenu de la ligne */
-.carte-photo {
-    width: 35px;
-    height: 35px;
-    border-radius: 6px;
-    object-fit: cover;
-    margin-right: 12px;
-    background-color: #eee; 
-}
-
-.carte-infos {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
-/* 4. On passe le texte en foncé vu que le fond de ton site est blanc */
-.carte-nom {
-    color: #333; 
-    font-weight: bold;
-    font-size: 13px;
-}
-
-.carte-club {
-    color: #777; 
-    font-size: 11px;
-    text-transform: uppercase;
-}
-
-.carte-logo {
-    width: 25px;
-    height: 25px;
-    object-fit: contain;
-}
-
-/* --- EFFET GRISÉ QUAND LE MAX EST ATTEINT --- */
-.carte-choix.grise {
-    opacity: 0.4; /* Rend la ligne semi-transparente */
-    cursor: not-allowed; /* Change la souris en sens interdit */
-    background-color: transparent !important;
-}
-
-.carte-choix.grise input[type="checkbox"] {
-    cursor: not-allowed;
-}
-
-/* --- REPOSITIONNEMENT DE LA CASE À COCHER --- */
-/* (Remplace ton ancien bloc .carte-choix input[type="checkbox"] par celui-ci) */
-.carte-choix input[type="checkbox"] {
-    display: block; 
-    margin-right: 6px; /* On réduit la marge pour la coller à la photo */
-    margin-left: 2px;
-    transform: scale(1.2); 
-    cursor: pointer;
-}
-/* Taille et alignement du drapeau dans le titre */
-.drapeau-titre {
-    height: 35px; /* Tu pourras ajuster cette taille si besoin */
-    margin-left: 15px; /* Petit espace entre le texte et le drapeau */
-    border-radius: 4px; /* Rend les bords très légèrement arrondis */
-    object-fit: cover;
-}
-
-@media screen and (max-width: 768px) {
-    body {
-        overflow-x: auto;
-        padding: 5px;
-    }
-
-    .interface-choix {
-        /* On ajuste la largeur pour que deux colonnes de joueurs rentrent bien */
-        width: 580px !important; 
-        min-width: 580px !important;
-        margin: 5px auto !important;
-        padding: 15px !important;
-        display: block !important;
-    }
-
-    .categories-container {
-        display: grid !important;
-        /* On crée deux colonnes de largeur égale */
-        grid-template-columns: 1fr 1fr !important; 
-        gap: 20px 10px !important; /* Espace vertical de 20px, horizontal de 10px */
-        width: 100% !important;
-    }
-
-    .colonne-choix {
-        width: 100% !important;
-        min-width: 0 !important;
-        display: block !important;
-        text-align: left;
-    }
-
-    /* On s'assure que les cartes joueurs ne débordent pas de leur moitié de grille */
-    .carte-choix {
-        display: flex !important;
-        width: 100% !important;
-        max-width: 270px;
-        box-sizing: border-box;
-    }
-
-    /* On réduit un peu la photo pour que le texte ait de la place dans la grille */
-    .carte-photo {
-        width: 30px !important;
-        height: 30px !important;
-        margin-right: 8px !important;
-    }
-
-    .carte-nom {
-        font-size: 12px !important;
-    }
-}
-
-.btn-suivant {
-    background-color: #007238;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-    width: 100%; /* Prend toute la largeur sur mobile */
-    text-transform: uppercase;
-}
-
-/* --- GESTION DES ÉTAPES (PAGES) --- */
 .step-container {
-    display: none; /* Cache toutes les pages par défaut */
+    display: none; /* Cache les pages par défaut */
     width: 100%;
     animation: fadeIn 0.3s ease-in-out;
 }
 
 .step-container.active {
-    display: block; /* Affiche uniquement la page active */
+    display: block !important; /* Affiche la page active */
 }
 
+.colonne-choix { 
+    width: 100% !important; 
+    margin-bottom: 20px; 
+}
+
+/* --- BOUTONS DE NAVIGATION --- */
 .navigation-btns {
     display: flex;
     gap: 10px;
     margin-top: 25px;
 }
 
-.btn-suivant, .btn-step {
+.btn-step, .btn-suivant, .btn-generer {
     background-color: #007238;
     color: white;
-    padding: 15px 20px;
+    padding: 15px 25px;
     border: none;
     border-radius: 5px;
     font-weight: bold;
@@ -268,37 +69,65 @@ label:has(input:disabled) { opacity: 0.3; }
     text-transform: uppercase;
 }
 
+/* --- CARTES JOUEURS (DANS L'INTERFACE) --- */
+.carte-choix {
+    display: flex !important;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 8px;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background 0.2s;
+    border: 1px solid transparent;
+}
+
+.carte-choix:hover { background-color: #f5f5f5; }
+
+.carte-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+    margin-right: 12px;
+    background-color: #eee;
+}
+
+.carte-infos {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.carte-nom { color: #333; font-weight: bold; font-size: 14px; }
+.carte-club { color: #777; font-size: 11px; text-transform: uppercase; }
+.carte-logo { width: 25px; height: 25px; object-fit: contain; }
+
+/* --- VISUEL FINAL (CACHE SUR LA PAGE) --- */
+#zone-a-capturer { display: none; width: 850px; background-color: #1a1a1a; color: white; padding: 40px; box-sizing: border-box; }
+.top-header { color: #aaa; margin-bottom: 20px; text-align: center; font-weight: bold; font-size: 14px; }
+.main-title { display: flex; margin-bottom: 40px; }
+.title-text { background: #007238; color: white; height: 60px; width: 100%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 900; text-transform: uppercase; border-radius: 5px; }
+
+.layout-colonnes { display: flex; justify-content: space-between; }
+.colonne-visuel { width: 48%; }
+.bloc-poste { display: flex; margin-bottom: 20px; align-items: stretch; }
+.etiquette-verticale { background: #007238; writing-mode: vertical-rl; text-orientation: upright; padding: 15px 5px; margin-right: 15px; font-weight: bold; border-radius: 5px; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+
+.joueur-carte { display: flex; align-items: center; background-color: #2a2a2a; border-radius: 8px; padding: 6px 12px; border: 1px solid #333; margin-bottom: 8px; }
+img.joueur-photo { width: 45px; height: 45px; border-radius: 5px; object-fit: cover; }
+.joueur-infos { flex-grow: 1; text-align: left; margin-left: 15px; }
+.joueur-nom { font-weight: bold; font-size: 16px; color: #fff; text-transform: uppercase; }
+.joueur-club { font-size: 12px; color: #aaa; }
+
+/* --- ANIMATIONS & MOBILE --- */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- ADAPTATION MOBILE --- */
 @media screen and (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    .interface-choix {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 auto !important;
-        padding: 15px !important;
-        box-sizing: border-box;
-    }
-
-    .categories-container {
-        display: block !important; /* On n'utilise plus de grid/flex ici */
-    }
-
-    .colonne-choix {
-        width: 100% !important;
-        min-width: 100% !important;
-        margin-bottom: 0; /* C'est géré par les boutons maintenant */
-    }
-
-    .carte-choix {
-        width: 100% !important;
-        padding: 10px 5px !important;
-    }
+    body { padding: 10px; }
+    .interface-choix { width: 100% !important; padding: 15px !important; box-sizing: border-box; }
+    .carte-nom { font-size: 13px; }
 }
