@@ -165,28 +165,43 @@ label:has(input:disabled) { opacity: 0.3; }
 }
 
 @media screen and (max-width: 768px) {
-    /* On force l'interface de CHOIX à s'empiler sur une seule colonne */
-    .categories-container { 
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
+    /* 1. On empêche le débordement horizontal sur le body */
+    body {
+        overflow-x: hidden;
+        padding: 5px; /* On réduit le padding pour gagner de la place */
     }
 
-    .colonne-choix {
+    /* 2. On étire le bloc blanc et on réduit les marges */
+    .interface-choix {
         width: 100% !important;
         max-width: 100% !important;
-        min-width: 100% !important;
+        margin: 0 !important;
+        padding: 10px !important;
+        box-sizing: border-box !important;
+        border-radius: 0; /* On enlève les arrondis pour coller aux bords */
     }
 
-    /* On force chaque ligne de joueur à prendre toute la largeur pour éviter le côte à côte */
-    .carte-choix {
-        width: 100% !important;
+    /* 3. On "dézoome" légèrement les colonnes pour qu'elles rentrent */
+    .categories-container {
         display: flex !important;
+        flex-wrap: nowrap !important; /* On garde l'alignement côte à côte */
+        overflow-x: auto; /* Permet de scroller de gauche à droite si c'est VRAIMENT trop large */
+        gap: 10px !important;
+        justify-content: flex-start !important;
     }
 
-    /* --- IMPORTANT : ON NE TOUCHE PAS AU VISUEL FINAL --- */
-    /* On s'assure que la zone de capture reste en deux colonnes comme sur PC */
-    #zone-a-capturer {
-        display: none; /* Il reste caché pendant le choix */
+    /* 4. On réduit la taille des cartes joueurs pour que ça rentre */
+    .colonne-choix {
+        flex: 0 0 170px !important; /* On fixe une largeur plus petite par colonne */
+        min-width: 170px !important;
+    }
+
+    .carte-nom {
+        font-size: 11px !important; /* On dézoome le texte */
+    }
+
+    .carte-photo {
+        width: 30px !important;
+        height: 30px !important;
     }
 }
