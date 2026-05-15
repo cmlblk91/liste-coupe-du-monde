@@ -34,7 +34,7 @@ function afficherJoueurs(liste, conteneurId, cptId, max, estMixte) {
         const label = document.createElement('label');
         label.className = 'carte-choix';
         
-        // CORRECTION : On utilise des noms de dataset cohérents (photo, club, logo)
+        // On construit la structure
         label.innerHTML = `
             <input type="checkbox" 
                 data-nom="${joueur.nom}" 
@@ -49,6 +49,7 @@ function afficherJoueurs(liste, conteneurId, cptId, max, estMixte) {
             <img src="${joueur.logo}" class="carte-logo" onerror="this.style.opacity='0'">
         `;
 
+        // On récupère la checkbox APRES l'avoir injectée pour attacher l'événement
         const checkbox = label.querySelector('input');
         checkbox.addEventListener('change', function() {
             if (estMixte) {
