@@ -213,3 +213,24 @@ label:has(input:disabled) { opacity: 0.3; }
         font-size: 12px !important;
     }
 }
+
+.btn-suivant {
+    background-color: #007238;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%; /* Prend toute la largeur sur mobile */
+    text-transform: uppercase;
+}
+
+/* Sur mobile, on s'assure que la colonne visible prend toute la place */
+@media screen and (max-width: 768px) {
+    .colonne-choix {
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+}
