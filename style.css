@@ -165,46 +165,47 @@ label:has(input:disabled) { opacity: 0.3; }
 }
 
 @media screen and (max-width: 768px) {
-    /* 1. On autorise le défilement horizontal si l'écran est petit */
     body {
-        overflow-x: auto;
+        overflow-x: auto; /* Permet de scroller si le bloc est plus large que le tel */
+        padding: 10px 5px;
     }
 
-    /* 2. On FORCE le fond blanc à être large pour accueillir les 2 colonnes */
     .interface-choix {
-        width: 600px !important; /* Largeur fixe pour stabiliser le fond blanc */
-        margin: 10px auto !important;
+        /* Le "fit-content" va coller aux attaquants, le "min-width" assure la base */
+        width: fit-content !important; 
+        min-width: 100% !important; 
+        margin: 0 auto !important;
         padding: 15px !important;
         display: block !important;
+        box-sizing: border-box;
     }
 
-    /* 3. On empile les deux premières catégories */
     .categories-container {
         display: block !important;
-        text-align: left;
+        /* On empêche le retour à la ligne global pour que Milieux/Att restent soudés */
+        white-space: nowrap !important; 
     }
 
-    /* 4. Gardiens et Défenseurs prennent toute la largeur du bloc de 600px */
-    .colonne-choix:nth-child(1), 
-    .colonne-choix:nth-child(2) {
-        width: 100% !important;
+    /* On remet le texte en normal à l'intérieur des colonnes */
+    .colonne-choix {
+        white-space: normal !important;
+        vertical-align: top;
         display: block !important;
-        margin-bottom: 20px;
+        width: 100% !important; /* Par défaut pour Gardiens/Def */
+        margin-bottom: 25px;
     }
 
-    /* 5. Milieux et Attaquants se mettent côte à côte */
+    /* LE RÉGLAGE PRÉCIS : Milieux (3e) et Attaquants (4e) */
     .colonne-choix:nth-child(3), 
     .colonne-choix:nth-child(4) {
-        display: inline-block !important;
-        width: 280px !important; /* Largeur de chaque colonne */
-        vertical-align: top;
-        margin-right: 5px;
+        display: inline-block !important; /* Ils se mettent côte à côte */
+        width: 260px !important; /* Ajuste cette valeur si tu veux qu'ils soient plus serrés */
+        margin-right: 10px;
     }
 
-    /* 6. On s'assure que les logos restent bien collés au nom du joueur */
     .carte-choix {
         display: flex !important;
-        width: fit-content !important; /* Important pour que le logo ne s'échappe pas */
-        min-width: 200px;
+        width: fit-content !important; /* Le cadre gris s'arrête juste après le logo */
+        min-width: 220px;
     }
 }
