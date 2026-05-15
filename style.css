@@ -165,22 +165,31 @@ label:has(input:disabled) { opacity: 0.3; }
 }
 
 /* --- Correction pour Téléphone --- */
-@media (max-width: 600px) {
-    /* On force le conteneur principal à s'empiler verticalement */
-    .selection-container { 
+/* --- CORRECTION MOBILE (FONCTIONNE ENFIN) --- */
+@media (max-width: 768px) {
+    /* On cible le bon conteneur qui contient tes colonnes */
+    .categories-container { 
         display: flex;
-        flex-direction: column;
+        flex-direction: column !important; /* On force l'empilement vertical */
         align-items: center;
     }
 
-    /* On s'assure que chaque bloc (Gardiens, Def, Milieux, Att) prend toute la largeur */
-    .position-group {
-        width: 95% !important; 
-        margin-bottom: 20px;
+    /* On force chaque colonne (Gardiens, Def, etc.) à prendre toute la largeur */
+    .colonne-choix {
+        width: 100% !important;
+        max-width: 400px; /* Pour éviter que ce soit trop large sur tablette */
+        margin-bottom: 30px;
+        min-width: unset; /* On enlève la contrainte de largeur mini */
     }
 
-    /* Si tu as un bloc spécifique pour Milieux/Attaquants côte à côte */
-    .milieux-attaquants-row {
-        flex-direction: column;
+    /* On ajuste un peu la taille des noms pour que ça loge bien */
+    .carte-nom {
+        font-size: 14px;
+    }
+
+    /* On réduit les marges du container principal pour gagner de la place */
+    .interface-choix {
+        padding: 10px;
+        margin: 10px;
     }
 }
