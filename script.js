@@ -5,7 +5,6 @@ const maxMilieuxAttaquants = 14;
 
 // Initialisation au chargement de la page
 window.onload = function() {
-    // On génère les listes pour chaque catégorie
     afficherJoueurs(gardiens, 'liste-gardiens', 'cpt-gardien', maxGardiens, false);
     afficherJoueurs(defenseurs, 'liste-defenseurs', 'cpt-defenseur', maxDefenseurs, false);
     afficherJoueurs(milieux, 'liste-milieux', 'cpt-mixte', maxMilieuxAttaquants, true);
@@ -35,7 +34,7 @@ function afficherJoueurs(liste, conteneurId, cptId, max, estMixte) {
         const label = document.createElement('label');
         label.className = 'carte-choix';
         
-        // Structure HTML : Checkbox | Photo | Infos (Nom/Club) | Logo
+        // CORRECTION : On utilise des noms de dataset cohérents (photo, club, logo)
         label.innerHTML = `
             <input type="checkbox" 
                 data-nom="${joueur.nom}" 
@@ -50,7 +49,6 @@ function afficherJoueurs(liste, conteneurId, cptId, max, estMixte) {
             <img src="${joueur.logo}" class="carte-logo" onerror="this.style.opacity='0'">
         `;
 
-        // Écouteur sur la checkbox pour gérer les limites
         const checkbox = label.querySelector('input');
         checkbox.addEventListener('change', function() {
             if (estMixte) {
@@ -117,52 +115,67 @@ function actualiserGrisage(cartes, estLimiteAtteinte) {
 // --- CAPTURE ET GÉNÉRATION IMAGE ---
 
 function genererVisuel() {
+    console.log("Démarrage de la capture...");
 
-    console.log("Le bouton a été cliqué !"); // AJOUTE ÇA
-    alert("Début de la génération...");      // ET ÇA POUR TESTER
-    
-    // ... reste du code
-    // 1. Remplissage des listes dans la zone de capture
+    // 1. Remplissage des listes
     remplirVisuel('liste-gardiens', 'visuel-gardiens');
     remplirVisuel('liste-defenseurs', 'visuel-defenseurs');
     remplirVisuel('liste-milieux', 'visuel-milieux');
     remplirVisuel('liste-attaquants', 'visuel-attaquants');
 
     const zone = document.getElementById('zone-a-capturer');
+    if (!zone) {
+        console.error("Erreur: L'ID 'zone-a-capturer' est introuvable.");
+        return;
+    }
+
+    // On prépare la zone pour html2canvas
     zone.style.display = 'block'; 
 
     html2canvas(zone, { 
         backgroundColor: '#1a1a1a', 
         scale: 3, 
-        useCORS: true 
+        useCORS: true,
+        logging: true
     }).then(canvas => {
         const imageFinaleConteneur = document.getElementById('image-finale');
-        imageFinaleConteneur.innerHTML = '';
-        imageFinaleConteneur.appendChild(canvas);
+        if (imageFinaleConteneur) {
+            imageFinaleConteneur.innerHTML = '';
+            imageFinaleConteneur.appendChild(canvas);
+        }
         
         zone.style.display = 'none'; 
         
-        // Affichage du bloc résultat
         const blocResultat = document.getElementById('resultat');
         const btnTelecharger = document.getElementById('btn-telecharger');
         
-        blocResultat.classList.add('resultat-visible'); 
-        btnTelecharger.style.display = 'block'; 
+        if (blocResultat) {
+            blocResultat.style.display = 'block'; // On force l'affichage
+            blocResultat.classList.add('resultat-visible'); 
+        }
+        if (btnTelecharger) {
+            btnTelecharger.style.display = 'block';
+        }
         
-        blocResultat.scrollIntoView({ behavior: 'smooth' });
+        if (blocResultat) blocResultat.scrollIntoView({ behavior: 'smooth' });
 
         if (typeof window.envoyerStatsFirebase === "function") {
             window.envoyerStatsFirebase();
         }
+    }).catch(err => {
+        console.error("Erreur html2canvas : ", err);
+        alert("Erreur lors de la création de l'image. Vérifie ta connexion.");
     });
 }
 
 function remplirVisuel(sourceId, cibleId) {
     const cible = document.getElementById(cibleId);
-    if(!cible) return;
+    const source = document.getElementById(sourceId);
+    if(!cible || !source) return;
+    
     cible.innerHTML = '';
     
-    const checkboxes = document.querySelectorAll(`#${sourceId} input:checked`);
+    const checkboxes = source.querySelectorAll('input:checked');
     checkboxes.forEach(cb => {
         const li = document.createElement('li');
         li.className = 'joueur-carte';
@@ -180,7 +193,10 @@ function remplirVisuel(sourceId, cibleId) {
 
 function telechargerImage() {
     const canvas = document.querySelector('#image-finale canvas');
-    if (!canvas) return;
+    if (!canvas) {
+        alert("Image non trouvée.");
+        return;
+    }
     const link = document.createElement('a');
     link.download = 'MaListeDZ_2026.png';
     link.href = canvas.toDataURL("image/png");
