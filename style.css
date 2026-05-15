@@ -164,35 +164,29 @@ label:has(input:disabled) { opacity: 0.3; }
     object-fit: cover;
 }
 
-/* --- CONFIGURATION MOBILE --- */
 @media screen and (max-width: 768px) {
-    /* 1. Le conteneur principal prend toute la place */
+    /* On force l'interface de CHOIX à s'empiler sur une seule colonne */
     .categories-container { 
-        display: block !important; 
-        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
     }
 
-    /* 2. Ta colonne "Milieux & Attaquants" prend toute la largeur */
     .colonne-choix {
-        display: block !important;
         width: 100% !important;
-        min-width: 100% !important;
-        margin-bottom: 30px !important;
-    }
-
-    /* 3. C'EST CETTE RÈGLE QUI VA TOUT RÉPARER : */
-    /* On force chaque ligne de joueur à prendre 100% de la largeur du téléphone */
-    .carte-choix {
-        display: flex !important; /* Pour garder l'alignement photo/nom */
-        width: 100% !important;   /* Force à prendre TOUTE la ligne */
         max-width: 100% !important;
-        box-sizing: border-box !important;
-        float: none !important;    /* Annule tout alignement côte à côte */
+        min-width: 100% !important;
     }
 
-    /* On ajuste un peu l'image pour que ce soit propre */
-    .carte-photo {
-        width: 45px !important; /* Un peu plus grand sur mobile pour le confort */
-        height: 45px !important;
+    /* On force chaque ligne de joueur à prendre toute la largeur pour éviter le côte à côte */
+    .carte-choix {
+        width: 100% !important;
+        display: flex !important;
+    }
+
+    /* --- IMPORTANT : ON NE TOUCHE PAS AU VISUEL FINAL --- */
+    /* On s'assure que la zone de capture reste en deux colonnes comme sur PC */
+    #zone-a-capturer {
+        display: none; /* Il reste caché pendant le choix */
     }
 }
