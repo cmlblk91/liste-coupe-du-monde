@@ -166,46 +166,46 @@ label:has(input:disabled) { opacity: 0.3; }
 
 @media screen and (max-width: 768px) {
     body {
-        overflow-x: auto; /* Permet de scroller si le bloc est plus large que le tel */
-        padding: 10px 5px;
+        overflow-x: auto; /* Permet de glisser vers la droite pour voir les attaquants */
+        padding: 0;
+        margin: 0;
     }
 
     .interface-choix {
-        /* Le "fit-content" va coller aux attaquants, le "min-width" assure la base */
-        width: fit-content !important; 
-        min-width: 100% !important; 
-        margin: 0 auto !important;
+        /* On force une largeur assez grande pour les deux colonnes */
+        width: 580px !important; 
+        min-width: 580px !important;
+        margin: 10px !important;
         padding: 15px !important;
         display: block !important;
-        box-sizing: border-box;
+        text-align: left;
     }
 
     .categories-container {
         display: block !important;
-        /* On empêche le retour à la ligne global pour que Milieux/Att restent soudés */
-        white-space: nowrap !important; 
     }
 
-    /* On remet le texte en normal à l'intérieur des colonnes */
-    .colonne-choix {
-        white-space: normal !important;
-        vertical-align: top;
+    /* Les deux premières catégories prennent toute la largeur du bloc blanc */
+    .colonne-choix:nth-child(1), 
+    .colonne-choix:nth-child(2) {
+        width: 100% !important;
         display: block !important;
-        width: 100% !important; /* Par défaut pour Gardiens/Def */
         margin-bottom: 25px;
     }
 
-    /* LE RÉGLAGE PRÉCIS : Milieux (3e) et Attaquants (4e) */
+    /* Milieux et Attaquants : On les aligne avec précision */
     .colonne-choix:nth-child(3), 
     .colonne-choix:nth-child(4) {
-        display: inline-block !important; /* Ils se mettent côte à côte */
-        width: 260px !important; /* Ajuste cette valeur si tu veux qu'ils soient plus serrés */
-        margin-right: 10px;
+        display: inline-block !important;
+        width: 275px !important; /* Largeur de chaque colonne */
+        vertical-align: top;
+        margin-right: 5px;
     }
 
+    /* On s'assure que les cartes joueurs ne s'étirent pas inutilement */
     .carte-choix {
         display: flex !important;
-        width: fit-content !important; /* Le cadre gris s'arrête juste après le logo */
-        min-width: 220px;
+        width: fit-content !important;
+        min-width: 240px;
     }
 }
