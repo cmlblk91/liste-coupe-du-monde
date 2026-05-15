@@ -79,5 +79,43 @@
 
     <script src="joueurs.js"></script>
     <script src="script.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  // Tes clés récupérées depuis ta capture
+  const firebaseConfig = {
+    apiKey: "AIzaSyDQ_qrhdoAM1Bi7htqbi8t3WlqE5aHf-A",
+    authDomain: "liste-dz.firebaseapp.com",
+    projectId: "liste-dz",
+    storageBucket: "liste-dz.firebasestorage.app",
+    messagingSenderId: "734747884688",
+    appId: "1:734747884688:web:f816604780c5efba95ec15",
+    measurementId: "G-CQ4ZVSZTT5"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.envoyerStatsFirebase = async function() {
+    const joueursChoisis = [];
+    document.querySelectorAll('input:checked').forEach(cb => {
+      joueursChoisis.push(cb.dataset.nom);
+    });
+
+    if (joueursChoisis.length === 0) return;
+
+    try {
+      await addDoc(collection(db, "listes_utilisateurs"), {
+        composition: joueursChoisis,
+        creeLe: serverTimestamp()
+      });
+      console.log("Statistiques enregistrées avec succès !");
+    } catch (e) {
+      console.error("Erreur lors de l'envoi des stats : ", e);
+    }
+  }
+</script>
+
 </body>
 </html>
