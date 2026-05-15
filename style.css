@@ -188,4 +188,5 @@ label:has(input:disabled) { opacity: 0.3; }
         padding: 10px !important;
         margin: 0 auto !important;
     }
+    body { background-color: red !important; }
 }
