@@ -166,46 +166,50 @@ label:has(input:disabled) { opacity: 0.3; }
 
 @media screen and (max-width: 768px) {
     body {
-        overflow-x: auto; /* Permet de glisser vers la droite pour voir les attaquants */
-        padding: 0;
-        margin: 0;
+        overflow-x: auto;
+        padding: 5px;
     }
 
     .interface-choix {
-        /* On force une largeur assez grande pour les deux colonnes */
+        /* On ajuste la largeur pour que deux colonnes de joueurs rentrent bien */
         width: 580px !important; 
         min-width: 580px !important;
-        margin: 10px !important;
+        margin: 5px auto !important;
         padding: 15px !important;
+        display: block !important;
+    }
+
+    .categories-container {
+        display: grid !important;
+        /* On crée deux colonnes de largeur égale */
+        grid-template-columns: 1fr 1fr !important; 
+        gap: 20px 10px !important; /* Espace vertical de 20px, horizontal de 10px */
+        width: 100% !important;
+    }
+
+    .colonne-choix {
+        width: 100% !important;
+        min-width: 0 !important;
         display: block !important;
         text-align: left;
     }
 
-    .categories-container {
-        display: block !important;
-    }
-
-    /* Les deux premières catégories prennent toute la largeur du bloc blanc */
-    .colonne-choix:nth-child(1), 
-    .colonne-choix:nth-child(2) {
-        width: 100% !important;
-        display: block !important;
-        margin-bottom: 25px;
-    }
-
-    /* Milieux et Attaquants : On les aligne avec précision */
-    .colonne-choix:nth-child(3), 
-    .colonne-choix:nth-child(4) {
-        display: inline-block !important;
-        width: 275px !important; /* Largeur de chaque colonne */
-        vertical-align: top;
-        margin-right: 5px;
-    }
-
-    /* On s'assure que les cartes joueurs ne s'étirent pas inutilement */
+    /* On s'assure que les cartes joueurs ne débordent pas de leur moitié de grille */
     .carte-choix {
         display: flex !important;
-        width: fit-content !important;
-        min-width: 240px;
+        width: 100% !important;
+        max-width: 270px;
+        box-sizing: border-box;
+    }
+
+    /* On réduit un peu la photo pour que le texte ait de la place dans la grille */
+    .carte-photo {
+        width: 30px !important;
+        height: 30px !important;
+        margin-right: 8px !important;
+    }
+
+    .carte-nom {
+        font-size: 12px !important;
     }
 }
